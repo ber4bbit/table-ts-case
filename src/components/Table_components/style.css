@@ -1,0 +1,19 @@
+.table-heading {
+    background-color: #474955;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.table-heading th {
+    border: none;
+}
+
+.table-container tr td:first-child {
+    padding: 12px;
+}
+
+.table-container tbody td {
+    font-size: 13px;
+}
