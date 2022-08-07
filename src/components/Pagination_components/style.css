@@ -1,0 +1,30 @@
+.pagination-container {
+    display: flex;
+
+    justify-content: space-around;
+}
+
+.pagination-container a {
+    color: #474955;
+
+    transition: all .3s;
+}
+
+.pagination-container a:hover {
+    text-decoration: none;
+
+    color: #7EBC3C;
+}
+
+.page {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+
+    margin: 0 6px;
+}
+
+.button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}

@@ -1,35 +1,54 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 
 import Posts from "./posts";
+import { Ipost } from "../../models";
 
 import "./style.css";
 
-export default function Table() {
-    const [posts, setPosts] = useState([]);
-    const [postsPerPage] = useState(10);
-    const url: string = "https://jsonplaceholder.typicode.com/posts";
+interface tableProps {
+    posts: Ipost[],
+    currentPagePosts: Ipost[],
+    setPosts: Function
+}
 
-    useEffect(() => {
-        const getPosts = async (url: string) => {
-            const response = await axios.get(url);
-            setPosts(response.data);
+export default function Table({ posts, currentPagePosts, setPosts }: tableProps) {
 
+    const sortPosts = (field: string) => {
+        let tempArr = posts.concat();
+        let sortedArr;
+        switch (field) {
+            case "id":
+                sortedArr = tempArr.sort((a, b) => (
+                    b.id - a.id
+                ));
+                setPosts(sortedArr);
+                break;
+            case "title":
+                sortedArr = tempArr.sort((a, b) => (
+                    a.title.localeCompare(b.title)
+                ))
+                setPosts(sortedArr);
+                break;
+            case "body":
+                sortedArr = tempArr.sort((a, b) => (
+                    a.body.localeCompare(b.body)
+                ))
+                setPosts(sortedArr);
+                break;
         }
-        getPosts(url);
-    }, [])
+    }
 
     return (
         <div className="table-container">
             <table className="table table-bordered">
                 <thead>
                     <tr className="table-heading text-white">
-                        <th>ID</th>
-                        <th>Заголовок</th>
-                        <th>Описание</th>
+                        <th onClick={() => sortPosts("id")}>ID</th>
+                        <th onClick={() => sortPosts("title")}>Заголовок</th>
+                        <th onClick={() => sortPosts("body")}>Описание</th>
                     </tr>
                 </thead>
-                <Posts posts={posts}/>
+                <Posts posts={currentPagePosts}/>
             </table>
         </div>
     )
