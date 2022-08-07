@@ -8,12 +8,20 @@
 
 .table-heading th {
     border: none;
+
+    min-width: 84px;
+
+    box-sizing: border-box;
 }
 
 .table-container tr td:first-child {
-    padding: 12px;
+    padding: 24px;
 }
 
 .table-container tbody td {
     font-size: 13px;
+}
+
+.table-heading__icon {
+    width: 25px;
 }

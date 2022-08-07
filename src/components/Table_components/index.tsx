@@ -3,6 +3,7 @@ import React from "react";
 import Posts from "./posts";
 import { Ipost } from "../../models";
 
+import headingIcon from "./heading-arrow-icon.svg"
 import "./style.css";
 
 interface tableProps {
@@ -43,9 +44,15 @@ export default function Table({ posts, currentPagePosts, setPosts }: tableProps)
             <table className="table table-bordered">
                 <thead>
                     <tr className="table-heading text-white">
-                        <th onClick={() => sortPosts("id")}>ID</th>
-                        <th onClick={() => sortPosts("title")}>Заголовок</th>
-                        <th onClick={() => sortPosts("body")}>Описание</th>
+                        <th onClick={() => sortPosts("id")}>ID
+                            <img src={headingIcon} className="table-heading__icon"/>
+                        </th>
+                        <th onClick={() => sortPosts("title")}>Заголовок
+                            <img src={headingIcon} className="table-heading__icon"/>
+                        </th>
+                        <th onClick={() => sortPosts("body")}>Описание
+                            <img src={headingIcon} className="table-heading__icon"/>
+                        </th>
                     </tr>
                 </thead>
                 <Posts posts={currentPagePosts}/>
