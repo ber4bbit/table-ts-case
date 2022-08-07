@@ -13,7 +13,7 @@ export default function SearchInput ({posts, setPosts, originalPosts}: searchPro
     const [searchWord, setSearchWord] = useState('');
 
     const sortedPosts = posts.filter(post => (
-        isNaN(Number(searchWord)) ? post.title.toLowerCase().includes(searchWord) : String(post.id).toLowerCase().includes(searchWord)
+        isNaN(Number(searchWord)) ? post.title.toLowerCase().includes(searchWord.toLowerCase()) : String(post.id).toLowerCase().includes(searchWord)
 
     ))
 
