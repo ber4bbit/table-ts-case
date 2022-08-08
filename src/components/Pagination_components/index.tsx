@@ -19,7 +19,7 @@ export default function Pagination({ postsPerPage, postsAmount, navigate, prevPa
 
     return (
         <div className="pagination-container">
-            <NavLink to={"/" + (currentPage - 1)} className="button" onClick={ () => prevPage() }>Назад</NavLink>
+            <NavLink to={"/" + (currentPage != 1 ? currentPage - 1 : currentPage) } className="button" onClick={ () => prevPage() }>Назад</NavLink>
             <ul className="pagination">
                 {
                     pages.map(page => (
@@ -29,7 +29,7 @@ export default function Pagination({ postsPerPage, postsAmount, navigate, prevPa
                     ))
                 }
             </ul>
-            <NavLink to={"/" + (currentPage + 1)} className="button" onClick={ () => nextPage() }>Далее</NavLink>
+            <NavLink to={"/" + (currentPage != Math.ceil(postsAmount / postsPerPage) ? currentPage + 1 : currentPage) } className="button" onClick={ () => nextPage() }>Далее</NavLink>
         </div>
     )
 }

@@ -19,7 +19,10 @@ export default function App() {
 
     const navigate = (page: number) => setCurrentPage(page);
     const prevPage = () => currentPage != 1 && setCurrentPage(prev => prev - 1);
-    const nextPage = () => currentPage != Math.ceil(posts.length / postsPerPage) && setCurrentPage(prev => prev + 1);
+    const nextPage = () => {
+        if (currentPagePosts.length === 0) return setCurrentPage(currentPage);
+        if (currentPage != Math.ceil(posts.length / postsPerPage)) setCurrentPage(prev => prev + 1);
+    }
 
     useEffect(() => {
         const getPosts = async (url: string) => {
