@@ -4,15 +4,14 @@ import "./style.css"
 import { Ipost } from "../../models";
 
 interface searchProps {
-    posts: Ipost[],
     originalPosts: Ipost[],
     setPosts: Function
 }
 
-export default function SearchInput ({posts, setPosts, originalPosts}: searchProps) {
+export default function SearchInput ({setPosts, originalPosts}: searchProps) {
     const [searchWord, setSearchWord] = useState('');
 
-    const sortedPosts = posts.filter(post => (
+    const sortedPosts = originalPosts.filter(post => (
         isNaN(Number(searchWord)) ? post.title.toLowerCase().includes(searchWord.toLowerCase()) : String(post.id).toLowerCase().includes(searchWord)
 
     ))

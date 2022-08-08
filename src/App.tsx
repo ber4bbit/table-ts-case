@@ -20,8 +20,7 @@ export default function App() {
     const navigate = (page: number) => setCurrentPage(page);
     const prevPage = () => currentPage != 1 && setCurrentPage(prev => prev - 1);
     const nextPage = () => {
-        if (currentPagePosts.length === 0) return setCurrentPage(currentPage);
-        if (currentPage != Math.ceil(posts.length / postsPerPage)) setCurrentPage(prev => prev + 1);
+        if ((currentPage !== Math.ceil(posts.length / postsPerPage)) && posts.length !== 0) setCurrentPage(prev => prev + 1);
     }
 
     useEffect(() => {
@@ -36,7 +35,7 @@ export default function App() {
 
   return (
     <div className="container" style={{ marginTop: "2%" }}>
-      <SearchInput posts={posts} setPosts={setPosts} originalPosts={originalPosts} />
+      <SearchInput setPosts={setPosts} originalPosts={originalPosts} />
       <Table currentPagePosts={currentPagePosts} posts={posts} setPosts={setPosts}/>
       <Pagination
           postsPerPage={postsPerPage} postsAmount={posts.length} navigate={navigate}

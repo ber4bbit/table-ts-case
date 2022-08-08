@@ -29,7 +29,7 @@ export default function Pagination({ postsPerPage, postsAmount, navigate, prevPa
                     ))
                 }
             </ul>
-            <NavLink to={"/" + (currentPage != Math.ceil(postsAmount / postsPerPage) ? currentPage + 1 : currentPage) } className="button" onClick={ () => nextPage() }>Далее</NavLink>
+            <NavLink to={"/" + ((currentPage != Math.ceil(postsAmount / postsPerPage)) && postsAmount !== 0 ? currentPage + 1 : currentPage) } className="button" onClick={ () => nextPage() }>Далее</NavLink>
         </div>
     )
 }
