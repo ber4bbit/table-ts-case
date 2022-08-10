@@ -28,3 +28,7 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
 }
+
+.active {
+    color: #7EBC3C !important;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 
 import Posts from "./posts";
 import { Ipost } from "../../models";
@@ -62,12 +62,13 @@ export default function Table({ posts, setPosts, setCurrentPage, postsPerPage }:
                     </tr>
                 </thead>
                 <Routes>
-                    <Route path="/" element={ <Posts posts={posts} page={1} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} /> } />
+                    <Route path="/" element={ <Navigate to="/1" /> } />
                     {
                         pages.map(page => (
                             <Route path={ "/" + page } element={ <Posts posts={posts} page={page} setCurrentPage={setCurrentPage} postsPerPage={postsPerPage} /> } />
                         ))
                     }
+                    <Route path="/*" element={ <Navigate to="/1" /> }/>
                 </Routes>
             </table>
         </div>
