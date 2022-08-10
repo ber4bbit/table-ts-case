@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
 import SearchInput from "./components/SearchInput_components";
@@ -13,10 +14,6 @@ export default function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
 
-    const lastPostIndex = currentPage * postsPerPage;
-    const firstPostIndex = lastPostIndex - postsPerPage;
-    const currentPagePosts = posts.slice(firstPostIndex, lastPostIndex);
-
     const navigate = (page: number) => setCurrentPage(page);
     const prevPage = () => currentPage != 1 && setCurrentPage(prev => prev - 1);
     const nextPage = () => {
@@ -27,7 +24,7 @@ export default function App() {
         const getPosts = async (url: string) => {
             const response = await axios.get(url);
             setPosts(response.data);
-            setOriginalPosts(response.data)
+            setOriginalPosts(response.data);
         }
         getPosts(url);
     }, []);
@@ -36,7 +33,7 @@ export default function App() {
   return (
     <div className="container" style={{ marginTop: "2%" }}>
       <SearchInput setPosts={setPosts} originalPosts={originalPosts} />
-      <Table currentPagePosts={currentPagePosts} posts={posts} setPosts={setPosts}/>
+      <Table posts={posts} setPosts={setPosts} setCurrentPage={setCurrentPage} postsPerPage={postsPerPage}/>
       <Pagination
           postsPerPage={postsPerPage} postsAmount={posts.length} navigate={navigate}
           prevPage={prevPage} nextPage={nextPage} currentPage={currentPage}

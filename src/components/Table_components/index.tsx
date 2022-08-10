@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 
 import Posts from "./posts";
 import { Ipost } from "../../models";
@@ -8,11 +9,16 @@ import "./style.css";
 
 interface tableProps {
     posts: Ipost[],
-    currentPagePosts: Ipost[],
-    setPosts: Function
+    postsPerPage: number,
+    setPosts: Function,
+    setCurrentPage: Function
 }
 
-export default function Table({ posts, currentPagePosts, setPosts }: tableProps) {
+export default function Table({ posts, setPosts, setCurrentPage, postsPerPage }: tableProps) {
+    const pages: number[] = [];
+
+    for (let i = 1; i <= Math.ceil(posts.length / 10); i++) pages.push(i);
+
 
     const sortPosts = (field: string) => {
         let tempArr = posts.concat();
@@ -55,7 +61,14 @@ export default function Table({ posts, currentPagePosts, setPosts }: tableProps)
                         </th>
                     </tr>
                 </thead>
-                <Posts posts={currentPagePosts}/>
+                <Routes>
+                    <Route path="/" element={ <Posts posts={posts} page={1} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} /> } />
+                    {
+                        pages.map(page => (
+                            <Route path={ "/" + page } element={ <Posts posts={posts} page={page} setCurrentPage={setCurrentPage} postsPerPage={postsPerPage} /> } />
+                        ))
+                    }
+                </Routes>
             </table>
         </div>
     )

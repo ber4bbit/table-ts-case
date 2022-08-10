@@ -3,14 +3,23 @@ import React from "react";
 import { Ipost } from "../../models";
 
 interface postsProps {
-    posts: Ipost[]
+    posts: Ipost[],
+    page: number,
+    postsPerPage: number,
+    setCurrentPage: Function
 }
 
-export default function Posts(props: postsProps) {
+export default function Posts({ posts, page, postsPerPage, setCurrentPage }: postsProps) {
+    const lastPostIndex = page * postsPerPage;
+    const firstPostIndex = lastPostIndex - postsPerPage;
+    const currentPagePosts = posts.slice(firstPostIndex, lastPostIndex);
+
+    setCurrentPage(page);
+
     return (
         <tbody>
             {
-                props.posts.map(post => (
+                currentPagePosts.map(post => (
                     <tr>
                         <td>{post.id}</td>
                         <td>{post.title}</td>
